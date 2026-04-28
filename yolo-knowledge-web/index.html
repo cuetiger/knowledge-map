@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YOLO 使用和优化 - 知识库</title>
+    <meta name="description" content="YOLO目标检测完整知识库：从基础概念到生产部署，涵盖Ultralytics框架、实战应用、性能优化等全链路内容">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/themes.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/markdown.css?v=3">
+    <link rel="stylesheet" href="css/main.css">
+
+    <!-- KaTeX -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+
+    <!-- Highlight.js -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/styles/atom-one-dark.min.css">
+</head>
+<body>
+    <!-- Reading Progress Bar -->
+    <div class="progress-bar" id="progressBar"></div>
+
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="header-left">
+            <button class="menu-toggle" id="menuToggle" aria-label="切换菜单">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+            </button>
+            <a href="#home" class="logo" onclick="navigateTo('home')">
+                <span class="logo-icon">
+                    <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+                        <rect x="4" y="8" width="20" height="16" rx="2" stroke="currentColor" stroke-width="2"/>
+                        <rect x="10" y="12" width="4" height="4" rx="0.5" fill="currentColor"/>
+                        <rect x="17" y="14" width="4" height="4" rx="0.5" fill="currentColor"/>
+                        <circle cx="12" cy="14" r="7" stroke="var(--accent)" stroke-width="1.5" stroke-dasharray="3 2" opacity="0.6"/>
+                    </svg>
+                </span>
+                <span class="logo-text">YOLO<span class="logo-accent">知识库</span></span>
+            </a>
+        </div>
+        <div class="header-center">
+            <div class="search-box" id="searchBox">
+                <svg class="search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+                <input type="text" id="searchInput" placeholder="搜索文章内容... (/)" autocomplete="off">
+                <kbd class="search-kbd">/</kbd>
+                <div class="search-results" id="searchResults"></div>
+            </div>
+        </div>
+        <div class="header-right">
+            <button class="theme-toggle" id="themeToggle" aria-label="切换主题">
+                <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+                <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Sidebar Overlay (Mobile) -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+        <nav class="sidebar-nav" id="sidebarNav">
+        </nav>
+        <div class="sidebar-footer">
+            <div class="sidebar-stats">
+                <span>16 篇文章</span>
+                <span>7 个分类</span>
+            </div>
+        </div>
+        <a href="#" class="sidebar-toggle-btn" id="sidebarToggleBtn" onclick="Navigation.toggleSidebar();return false;" title="收起侧边栏">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="11 17 6 12 11 7"/><polyline points="18 17 13 12 18 7"/></svg>
+            <span>收起导航</span>
+        </a>
+    </aside>
+
+    <!-- Floating Expand Button (shown when sidebar hidden) -->
+    <a href="#" class="sidebar-expand-fab" id="sidebarExpandFab" onclick="Navigation.toggleSidebar();return false;" title="展开导航">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>
+    </a>
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent">
+        <!-- Home Page -->
+        <div class="page home-page" id="homePage">
+            <div class="hero-section">
+                <div class="hero-badge">v2026.04</div>
+                <h1 class="hero-title">
+                    YOLO<span class="gradient-text">使用和优化</span>
+                </h1>
+                <p class="hero-subtitle">从基础概念到生产部署，一站式掌握 YOLO 目标检测技术栈</p>
+                <div class="hero-tags">
+                    <span class="tag">YOLOv8</span>
+                    <span class="tag">Ultralytics</span>
+                    <span class="tag">TensorRT</span>
+                    <span class="tag">深度学习</span>
+                </div>
+            </div>
+            <div class="section-cards" id="sectionCards">
+            </div>
+            <div class="quick-start-section">
+                <h2>🚀 快速开始</h2>
+                <div class="quick-start-grid">
+                    <a href="#" onclick="navigateTo('01-YOLO基础概念/目标检测基础')" class="quick-card">
+                        <div class="quick-card-icon">🌱</div>
+                        <div class="quick-card-title">新手入门</div>
+                        <div class="quick-card-desc">从零了解目标检测与YOLO核心原理</div>
+                    </a>
+                    <a href="#" onclick="navigateTo('02-Ultralytics框架入门/快速开始指南')" class="quick-card">
+                        <div class="quick-card-icon">⚡</div>
+                        <div class="quick-card-title">快速上手</div>
+                        <div class="quick-card-desc">10分钟运行第一个YOLO检测程序</div>
+                    </a>
+                    <a href="#" onclick="navigateTo('03-实战应用/模型训练完整流程')" class="quick-card">
+                        <div class="quick-card-icon">🎯</div>
+                        <div class="quick-card-title">实战训练</div>
+                        <div class="quick-card-desc">端到端完成自定义数据集训练</div>
+                    </a>
+                    <a href="#" onclick="navigateTo('05-性能优化/推理速度优化')" class="quick-card">
+                        <div class="quick-card-icon">🚀</div>
+                        <div class="quick-card-title">性能优化</div>
+                        <div class="quick-card-desc">TensorRT加速、量化、剪枝技术</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Article Page -->
+        <div class="article-container" id="articleContainer" style="display:none;">
+            <article class="page article-page" id="articlePage">
+                <div class="article-header">
+                    <div class="article-breadcrumb" id="breadcrumb"></div>
+                    <h1 class="article-title" id="articleTitle"></h1>
+                    <div class="article-meta" id="articleMeta"></div>
+                </div>
+                <div class="article-body" id="articleBody">
+                </div>
+                <nav class="article-nav" id="articleNav">
+                </nav>
+            </article>
+            <div class="resize-handle" id="resizeHandle" title="拖拽调整宽度"></div>
+            <aside class="toc-sidebar" id="tocSidebar">
+                <div class="toc-header">目录</div>
+                <nav class="toc-nav" id="tocNav"></nav>
+            </aside>
+        </div>
+    </main>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" aria-label="返回顶部">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
+    </button>
+
+    <!-- Keyboard Shortcuts Modal -->
+    <div class="modal-overlay" id="shortcutsModal">
+        <div class="modal shortcuts-modal">
+            <div class="modal-header">
+                <h3>键盘快捷键</h3>
+                <button class="modal-close" onclick="toggleShortcuts()">&times;</button>
+            </div>
+            <div class="shortcuts-grid">
+                <div class="shortcut-item"><kbd>/</kbd><span>聚焦搜索</span></div>
+                <div class="shortcut-item"><kbd>j</kbd><span>下一篇文章</span></div>
+                <div class="shortcut-item"><kbd>k</kbd><span>上一篇文章</span></div>
+                <div class="shortcut-item"><kbd>t</kbd><span>切换主题</span></div>
+                <div class="shortcut-item"><kbd>[</kbd><span>收起/展开侧边栏</span></div>
+                <div class="shortcut-item"><kbd>?</kbd><span>显示快捷键</span></div>
+                <div class="shortcut-item"><kbd>Esc</kbd><span>关闭弹窗/搜索</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- External Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/marked@9.1.6/marked.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/core.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/languages/python.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.0/lib/languages/yaml.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.9/lib/languages/bash.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.9/lib/languages/dockerfile.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/highlight.js@11.9.9/lib/languages/json.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+
+    <!-- App Scripts -->
+    <script src="js/data.js?v=6"></script>
+    <script src="js/parser.js?v=11"></script>
+    <script src="js/navigation.js?v=5"></script>
+    <script src="js/search.js?v=4"></script>
+    <script src="js/theme.js?v=4"></script>
+    <script src="js/app.js?v=5"></script>
+</body>
+</html>

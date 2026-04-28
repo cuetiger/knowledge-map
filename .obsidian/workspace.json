@@ -1,0 +1,210 @@
+{
+  "main": {
+    "id": "a1cd560eb64ecbf6",
+    "type": "split",
+    "children": [
+      {
+        "id": "8f79c385d25f9898",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ee6e3c0d0aeff93a",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "关系图谱"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "f1ada3cb8d0ace85",
+    "type": "split",
+    "children": [
+      {
+        "id": "77203adb96a34d79",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b30c994ac1347bd5",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "1b2a40e5eae35cb0",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "654bbd8cf9a1f5f7",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "8934df7b647cc202",
+    "type": "split",
+    "children": [
+      {
+        "id": "27ce5749432fd1a7",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b2d6d4d08c8a8f91",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "反向链接"
+            }
+          },
+          {
+            "id": "a591d466a1336731",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "出链"
+            }
+          },
+          {
+            "id": "83fe4a67b38d1071",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "2c0d0f25530f11e6",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "df8e8cea7a6d53c6",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "大纲"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "bases:新建数据库": false
+    }
+  },
+  "active": "b30c994ac1347bd5",
+  "lastOpenFiles": [
+    "YOLO使用和优化/00-首页.md",
+    "yolo-knowledge-web/_fix.py",
+    "yolo-knowledge-web/_fix_data.js",
+    "YOLO使用和优化/01-YOLO基础概念/目标检测基础.md",
+    "YOLO使用和优化/07-资源与参考/obsidian配置指南.md",
+    "YOLO使用和优化/01-YOLO基础概念/YOLO发展历程.md",
+    "YOLO使用和优化/01-YOLO基础概念/YOLOv8架构详解.md",
+    "yolo-knowledge-web/css/main.css",
+    "yolo-knowledge-web/js/parser.js",
+    "yolo-knowledge-web/index.html",
+    "YOLO使用和优化/07-资源与参考/学习路线图.md",
+    "_integrate_paper.js",
+    "YOLO使用和优化/08-论文精读/YOLO核心论文深度解析.md",
+    "YOLO使用和优化/08-论文精读",
+    "YOLO使用和优化/07-资源与参考/推荐论文列表.md",
+    "_build_data.js",
+    "待发布.md",
+    "yolo-knowledge-web/js/app.js",
+    "yolo-knowledge-web/js/theme.js",
+    "YOLO使用和优化/03-实战应用/数据集准备与格式转换.md",
+    "YOLO使用和优化/03-实战应用/模型训练完整流程.md",
+    "YOLO使用和优化/02-Ultralytics框架入门/配置文件说明.md",
+    "YOLO使用和优化/02-Ultralytics框架入门/快速开始指南.md",
+    "YOLO使用和优化/02-Ultralytics框架入门/环境搭建与安装.md",
+    "YOLO使用和优化/02-Ultralytics框架入门/核心API详解.md",
+    "YOLO使用和优化/05-性能优化/训练加速策略.md",
+    "YOLO使用和优化/05-性能优化/模型压缩技术.md",
+    "YOLO使用和优化/05-性能优化/推理速度优化.md"
+  ]
+}
